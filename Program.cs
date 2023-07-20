@@ -2,7 +2,8 @@
 
 using Helpers;
 System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-ExcelHelper.ReadWorkBook();
+var excelHelper = new ExcelHelper("./titanic.csv");
+excelHelper.ReadWorkBook();
 
 // var apiKey = "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";
 
