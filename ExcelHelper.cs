@@ -1,30 +1,13 @@
 using ExcelDataReader;
-using Microsoft.VisualBasic;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Helpers;
-// public static class ExcelHelper
-// {
-
-//     public static void ReadWorkBook()
-//     {
-//         using var stream = File.Open("./titanic.csv", FileMode.Open, FileAccess.Read);
-//         using var reader = ExcelReaderFactory.CreateCsvReader(stream);
-//         while (reader.Read())
-//         {
-//             var row = reader;
-//             Console.WriteLine($"{row[1]} / {row[2]} / {row[3]} / {row[4]}" );
-//         }
-//     }
-// }
 
 public class ExcelHelper 
 {
-    private string _filepath;
-    List<string> _headers = new List<string>();
-    List<List<string>> _rows = new List<List<string>>();
-    private bool _hasHeaders;
+    private readonly string _filepath;
+    readonly List<string> _headers = new();
+    readonly List<List<string>> _rows = new();
+    private readonly bool _hasHeaders;
     
     public  ExcelHelper(string filepath, bool hasHeaders = true)
     {
@@ -43,15 +26,23 @@ public class ExcelHelper
             var row =  reader;
             if(firstRow && _hasHeaders)
             {
-                _headers.AddRange(row);
+                _headers.AddRange(GetRow(row));
                 firstRow = false;
             }
             else
             {
-                _rows.Add((new List<string>()).AddRange(row));
+                _rows.Add(GetRow(row));
             }
-            // Console.WriteLine($"{row[0]} / {row[1]} / {row[2]} / {row[3]} / {row[4]} / {row[5]} / {row[6]} / {row[7]} / {row[8]} / {row[9]} / {row[10]} / {row[11]}" );
         }
-        Console.WriteLine($"Headers: {_headers.Count}");
+        Console.WriteLine($"Headers: {_headers.Count} {_headers.ToArray()[1] } {_rows.Count} {_rows.ToArray()[1][0]}");
+    }
+    private static List<string>  GetRow(IExcelDataReader row)
+    {
+        List<string> returnRow = new();
+        for(int i = 0; i < row.FieldCount; i++)
+        {
+            returnRow.Add(row[i]?.ToString() ?? "");
+        }
+        return returnRow;
     }
 }
