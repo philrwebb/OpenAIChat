@@ -15,6 +15,9 @@ public class ExcelHelper
         _hasHeaders = hasHeaders;
     }
 
+    public List<List<string>> Rows => _rows;
+    
+
     public void ReadWorkBook()
     {
         using var stream = File.Open(_filepath, FileMode.Open, FileAccess.Read);
@@ -34,7 +37,6 @@ public class ExcelHelper
                 _rows.Add(GetRow(row));
             }
         }
-        Console.WriteLine($"Headers: {_headers.Count} {_headers.ToArray()[1] } {_rows.Count} {_rows.ToArray()[1][0]}");
     }
     private static List<string>  GetRow(IExcelDataReader row)
     {

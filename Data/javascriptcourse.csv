@@ -1,0 +1,5 @@
+﻿week,topic,synopsis
+1,Introduction to JavaScript,"Introduction to JavaScript, its uses, where it fits in the web development ecosystem, and setting up development environment."
+2,Basic Syntax and Variables,"Understanding the syntax, variables, and data types in JavaScript."
+3,Control Structures,"Diving into conditionals, loops and how they help in managing the flow of code."
+4,Functions,"Introduction to functions, parameters, arguments, and return values."
